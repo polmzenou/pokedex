@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gameboy-darkest: #0a1628;
+  --gameboy-dark: #1e3a5f;
+  --gameboy-light: #3b82f6;
+  --gameboy-lightest: #93c5fd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--gameboy-darkest);
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  image-rendering: pixelated;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--gameboy-darkest);
+  border-left: 2px solid var(--gameboy-dark);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--gameboy-light);
+  border: 2px solid var(--gameboy-dark);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--gameboy-lightest);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--gameboy-light) var(--gameboy-darkest);
+}
+
+.lcd-texture {
+  background-color: var(--gameboy-darkest);
+  background-image: 
+    linear-gradient(
+      rgba(147, 197, 253, 0.03) 50%,
+      transparent 50%
+    );
+  background-size: 100% 4px;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+  );
+}
+
+@keyframes pixelBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pixelFade {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes spriteBounce {
+  0% { transform: scale(0.8) translateY(10px); opacity: 0; }
+  50% { transform: scale(1.05) translateY(-5px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.animate-pixel-blink {
+  animation: pixelBlink 1s step-end infinite;
+}
+
+.animate-pixel-fade {
+  animation: pixelFade 150ms steps(3) forwards;
+}
+
+.animate-sprite-bounce {
+  animation: spriteBounce 300ms ease-out forwards;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--gameboy-light);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--gameboy-light);
+  color: var(--gameboy-darkest);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: auto;
+  }
+}
