@@ -1,4 +1,4 @@
-import { LocalizedName, PokemonSprites, PokemonTypeSlot, PokemonStat } from './pokemon'
+import { LocalizedName, PokemonSprites, PokemonTypeSlot } from './pokemon'
 
 export interface PokemonFormResponse {
   id: number
@@ -31,9 +31,10 @@ export interface VarietyInfo {
   name: string
   isDefault: boolean
   formType: 'mega' | 'alola' | 'galar' | 'hisui' | 'gmax' | 'other'
+  formLabel: string
   sprite: string
   types: string[]
-  stats: { name: string; value: number }[]
+  stats: { name: string; nameFr: string; value: number }[]
 }
 
 export const FORM_TYPE_LABELS: Record<string, string> = {

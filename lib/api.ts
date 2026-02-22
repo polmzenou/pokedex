@@ -520,5 +520,5 @@ export async function getPokemonVarieties(speciesName: string): Promise<VarietyI
   })
 
   const varieties = await Promise.all(varietyPromises)
-  return varieties.filter((v): v is VarietyInfo & { formLabel: string } => v !== null)
+  return varieties.filter((v): v is VarietyInfo => v !== null)
 }
